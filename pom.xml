@@ -6,7 +6,7 @@
 
   <groupId>br.eti.monzeu</groupId>
   <artifactId>task-processor-spring</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.2</version>
 
   <name>task-processor-spring</name>
 
