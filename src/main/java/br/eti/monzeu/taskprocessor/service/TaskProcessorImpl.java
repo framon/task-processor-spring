@@ -48,8 +48,7 @@ public class TaskProcessorImpl implements TaskProcessor {
   @Override
   public List<TaskStatus<?>> search(Instant modifiedSince, String query) {
 
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String principal = (String) auth.getPrincipal();
+    String principal = getPrincipal();
 
     TaskFilter filter = new TaskFilter();
     filter.user(principal);
@@ -92,8 +91,7 @@ public class TaskProcessorImpl implements TaskProcessor {
   public <T> TaskStatus<T> process(Request<T> request)
       throws JsonProcessingException {
 
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String principal = (String) auth.getPrincipal();
+    String principal = getPrincipal();
 
     TaskModel model = new TaskModel();
     model.setId(UUID.randomUUID());
@@ -142,6 +140,11 @@ public class TaskProcessorImpl implements TaskProcessor {
     @SuppressWarnings("unchecked")
     TaskStatus<T> result = conversion.convert(model, TaskStatus.class);
     return result;
+  }
+
+  private String getPrincipal() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    return auth != null ? (String) auth.getPrincipal() : "«none»";
   }
 
   public String resolveTaskBeanName(Request<?> request) {
