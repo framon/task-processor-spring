@@ -1,6 +1,6 @@
 package br.eti.monzeu.taskprocessor;
 
-public interface Task<V> {
+public interface Task<R extends Request<V>, V> {
 
-  V run() throws Exception;
+  V run(R request) throws Exception;
 }

@@ -88,7 +88,7 @@ public class TaskProcessorImpl implements TaskProcessor {
   }
 
 
-  public <T> TaskStatus<T> process(Request<T> request)
+  public <V> TaskStatus<V> process(Request<V> request)
       throws JsonProcessingException {
 
     String principal = getPrincipal();
@@ -106,9 +106,9 @@ public class TaskProcessorImpl implements TaskProcessor {
     try {
 
       String taskBeanName = resolveTaskBeanName(request);
-      Task<?> task = (Task<?>) applicationContext.getBean(taskBeanName, request);
+      Task<Request<V>, V> task = (Task<Request<V>, V>) applicationContext.getBean(taskBeanName);
 
-      Object result = task.run();
+      V result = task.run(request);
 
       boolean isVoid = false;
       for (Type genericInterface : task.getClass().getGenericInterfaces()) {
@@ -138,7 +138,7 @@ public class TaskProcessorImpl implements TaskProcessor {
     }
 
     @SuppressWarnings("unchecked")
-    TaskStatus<T> result = conversion.convert(model, TaskStatus.class);
+    TaskStatus<V> result = conversion.convert(model, TaskStatus.class);
     return result;
   }
 
