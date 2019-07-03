@@ -115,7 +115,7 @@ public class TaskProcessorImpl implements TaskProcessor {
         if (genericInterface instanceof ParameterizedType) {
           Type rawType = ((ParameterizedType) genericInterface).getRawType();
           if (Task.class.equals(rawType)) {
-            Type genericType = ((ParameterizedType) genericInterface).getActualTypeArguments()[0];
+            Type genericType = ((ParameterizedType) genericInterface).getActualTypeArguments()[1];
             isVoid = Void.class.equals(genericType);
           }
         }
