@@ -1,5 +1,6 @@
 package br.eti.monzeu.taskprocessor.service;
 
+import br.eti.monzeu.taskprocessor.Error;
 import br.eti.monzeu.taskprocessor.Status;
 import br.eti.monzeu.taskprocessor.TaskStatus;
 import br.eti.monzeu.taskprocessor.util.AutoConverter;
