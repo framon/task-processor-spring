@@ -14,7 +14,6 @@ public class TaskStatus<T> {
   private String name;
   private Status status;
 
-  @JsonInclude(JsonInclude.Include.NON_NULL)
   private T result;
 
   public String getCode() {
